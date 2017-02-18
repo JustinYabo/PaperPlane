@@ -2,16 +2,17 @@ package com.xpp.neo1.paperplane.home.reader.zhihu;
 
 import android.content.Context;
 
+import javax.inject.Inject;
+
 /**
  * Created by neo1 on 2017/2/14.
  */
 
 public class ZhihuPresenter implements ZhihuContract.Presenter {
-    private Context mContext;
     private ZhihuContract.View mView;
 
-    public ZhihuPresenter(Context context, ZhihuContract.View view) {
-        mContext = context;
+    @Inject
+    public ZhihuPresenter(ZhihuContract.View view) {
         mView = view;
     }
 

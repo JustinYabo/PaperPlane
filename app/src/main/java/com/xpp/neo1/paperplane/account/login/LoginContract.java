@@ -9,7 +9,7 @@ import com.xpp.neo1.paperplane.bean.User;
  */
 
 public interface LoginContract {
-    interface View extends BaseView<Presenter> {
+    interface View extends BaseView{
         String getUserName();
 
         String getPassword();

@@ -8,11 +8,9 @@ import android.content.Context;
 
 public class DoubanPresenter implements DoubanContract.Presenter {
     private DoubanContract.View mView;
-    private Context mContext;
 
     public DoubanPresenter(Context context, DoubanContract.View view) {
         mView = view;
-        mContext = context;
     }
 
     @Override

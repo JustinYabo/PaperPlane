@@ -10,7 +10,12 @@ import android.view.ViewGroup;
 
 import com.xpp.neo1.paperplane.R;
 
-public class GuokeFragment extends Fragment implements GuokeContract.View{
+import javax.inject.Inject;
+
+public class GuokeFragment extends Fragment implements GuokeContract.View {
+    @Inject
+    GuokePresenter presenter;
+
     public static GuokeFragment newInstance() {
         return new GuokeFragment();
     }
@@ -53,7 +58,14 @@ public class GuokeFragment extends Fragment implements GuokeContract.View{
     }
 
     @Override
-    public void setPresenter(GuokeContract.Presenter presenter) {
+    public void initViews() {
 
+    }
+
+    private void setupComponent() {
+        DaggerGuokeFragmentComponent.builder()
+                .guokePresenterModule(new GuokePresenterModule(this))
+                .build()
+                .inject(this);
     }
 }

@@ -8,7 +8,7 @@ import com.xpp.neo1.paperplane.base.BaseView;
  */
 
 public interface RegisterContract {
-    interface View extends BaseView<Presenter> {
+    interface View extends BaseView{
         void showResgistering();
 
         void hideResgistering();

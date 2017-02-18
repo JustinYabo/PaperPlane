@@ -21,6 +21,9 @@ import com.xpp.neo1.paperplane.home.reader.meizi.MeiziPresenter;
 import com.xpp.neo1.paperplane.home.reader.zhihu.ZhihuFragment;
 import com.xpp.neo1.paperplane.home.reader.zhihu.ZhihuPresenter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -38,15 +41,15 @@ public class MainFragment extends Fragment {
     private DoubanFragment mDoubanFragment;
 
 
-    private ZhihuPresenter mZhihuPresenter;
-    private MeiziPresenter mMeiziPresenter;
-    private GuokePresenter mGuokePresenter;
-    private DoubanPresenter mDoubanPresenter;
+    private static final String ZHIHU_TAG = "知乎";
+    private static final String MEIZI_TAG = "妹子";
+    private static final String GUOKE_TAG = "果壳";
+    private static final String DOUBAN_TAG = "豆瓣";
 
-    private static final String ZHIHU_TAG = "zhihu";
-    private static final String MEIZI_TAG = "meizi";
-    private static final String GUOKE_TAG = "guoke";
-    private static final String DOUBAN_TAG = "douban";
+    private MainPagerAdapter mAdapter;
+
+    private List<Fragment> mFragmentList;
+    private List<String> mTitleList;
 
 
     public static MainFragment newInstance() {
@@ -68,13 +71,6 @@ public class MainFragment extends Fragment {
             mGuokeFragment = GuokeFragment.newInstance();
             mDoubanFragment = DoubanFragment.newInstance();
         }
-
-        mZhihuPresenter = new ZhihuPresenter(getActivity(), mZhihuFragment);
-        mMeiziPresenter = new MeiziPresenter(getActivity(), mMeiziFragment);
-        mGuokePresenter = new GuokePresenter(getActivity(), mGuokeFragment);
-        mDoubanPresenter = new DoubanPresenter(getActivity(), mDoubanFragment);
-
-
     }
 
     @Override
@@ -83,8 +79,48 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, root);
+        initViews();
         return root;
     }
 
+    private void initViews() {
+        mFragmentList = new ArrayList<>();
+        mTitleList = new ArrayList<>();
 
+        mFragmentList.add(mZhihuFragment);
+        mFragmentList.add(mMeiziFragment);
+        mFragmentList.add(mGuokeFragment);
+        mFragmentList.add(mDoubanFragment);
+
+        mTitleList.add(ZHIHU_TAG);
+        mTitleList.add(MEIZI_TAG);
+        mTitleList.add(GUOKE_TAG);
+        mTitleList.add(DOUBAN_TAG);
+        mAdapter = new MainPagerAdapter(getChildFragmentManager(), mFragmentList, mTitleList);
+
+        viewPager.setAdapter(mAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (tabLayout.getSelectedTabPosition() == 0) {
+                    mZhihuFragment.showTimePickerDialog();
+                }
+            }
+        });
+
+        fab.setRippleColor(getResources().getColor(R.color.colorPrimaryDark));
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        FragmentManager manager = getChildFragmentManager();
+        manager.putFragment(outState, ZHIHU_TAG, mZhihuFragment);
+        manager.putFragment(outState, MEIZI_TAG, mMeiziFragment);
+        manager.putFragment(outState, GUOKE_TAG, mGuokeFragment);
+        manager.putFragment(outState, DOUBAN_TAG, mDoubanFragment);
+    }
 }

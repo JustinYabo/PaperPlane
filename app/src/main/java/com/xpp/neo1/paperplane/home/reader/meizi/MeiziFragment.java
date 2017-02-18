@@ -9,8 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.xpp.neo1.paperplane.R;
+import com.xpp.neo1.paperplane.home.reader.zhihu.DaggerZhihuFragmentComponent;
 
-public class MeiziFragment extends Fragment implements MeiziContract.View{
+import javax.inject.Inject;
+
+public class MeiziFragment extends Fragment implements MeiziContract.View {
+    @Inject
+    MeiziPresenter meiziPresenter;
+
     public static MeiziFragment newInstance() {
         return new MeiziFragment();
     }
@@ -18,6 +24,7 @@ public class MeiziFragment extends Fragment implements MeiziContract.View{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setupComponent();
     }
 
     @Override
@@ -53,7 +60,15 @@ public class MeiziFragment extends Fragment implements MeiziContract.View{
     }
 
     @Override
-    public void setPresenter(MeiziContract.Presenter presenter) {
+    public void initViews() {
 
+    }
+
+    private void setupComponent() {
+        DaggerMeiziFragmentComponent
+                .builder()
+                .meiziPresenerModule(new MeiziPresenerModule(this))
+                .build()
+                .inject(this);
     }
 }

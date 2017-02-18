@@ -2,6 +2,7 @@ package com.xpp.neo1.paperplane.account.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -10,9 +11,12 @@ import android.widget.Toast;
 
 import com.xpp.neo1.paperplane.R;
 import com.xpp.neo1.paperplane.account.register.RegisterActivity;
+import com.xpp.neo1.paperplane.app.AppComponent;
 import com.xpp.neo1.paperplane.bean.User;
 import com.xpp.neo1.paperplane.base.BaseActivity;
 import com.xpp.neo1.paperplane.home.MainActivity;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,14 +35,23 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     @BindView(R.id.password)
     EditText password;
 
-    private LoginContract.Presenter mUserLoginPresenter;
+    @Inject
+    LoginPresenter mUserLoginPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        mUserLoginPresenter = new LoginPresenter(this);
+    }
+
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+        DaggerLoginActivityComponent
+                .builder()
+                .loginPresenterModule(new LoginPresenterModule(this))
+                .build()
+                .inject(this);
     }
 
 
@@ -94,8 +107,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     @Override
-    public void setPresenter(LoginContract.Presenter presenter) {
-        mUserLoginPresenter = presenter;
+    public void initViews() {
+
     }
 }
 

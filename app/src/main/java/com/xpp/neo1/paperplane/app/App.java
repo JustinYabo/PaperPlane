@@ -13,11 +13,29 @@ import java.util.List;
  */
 
 public class App extends Application {
+    private static App sInstance;
+    private AppComponent appComponent;
     private static List<Activity> activityList = new LinkedList<>();
 
     @Override
     public void onCreate() {
         super.onCreate();
+        this.sInstance = this;
+        setupComponent();
+    }
+
+    private void setupComponent() {
+        appComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .build();
+    }
+
+    public static App getsInstance() {
+        return sInstance;
+    }
+
+    public AppComponent getAppComponent() {
+        return appComponent;
     }
 
     //获取栈顶activity
@@ -34,8 +52,9 @@ public class App extends Application {
     public static void removeActivity(Activity activity) {
         activityList.remove(activity);
     }
+
     //关闭所有的activity
-    public static void finishedAllActivity(){
+    public static void finishedAllActivity() {
         try {
             for (Activity activity : activityList) {
                 if (null != activity) {

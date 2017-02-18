@@ -2,6 +2,8 @@ package com.xpp.neo1.paperplane.account.login;
 
 import com.xpp.neo1.paperplane.bean.User;
 
+import javax.inject.Inject;
+
 import io.reactivex.Maybe;
 import io.reactivex.MaybeObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -15,6 +17,7 @@ import io.reactivex.schedulers.Schedulers;
 public class LoginPresenter implements LoginContract.Presenter {
     private LoginContract.View mLoginView;
 
+    @Inject
     public LoginPresenter(LoginContract.View loginView) {
         this.mLoginView = loginView;
     }

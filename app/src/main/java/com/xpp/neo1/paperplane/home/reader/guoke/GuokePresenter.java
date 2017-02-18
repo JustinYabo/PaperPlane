@@ -2,17 +2,18 @@ package com.xpp.neo1.paperplane.home.reader.guoke;
 
 import android.content.Context;
 
+import javax.inject.Inject;
+
 /**
  * Created by neo1 on 2017/2/14.
  */
 
 public class GuokePresenter implements GuokeContract.Presenter {
     private GuokeContract.View mView;
-    private Context mContext;
 
-    public GuokePresenter(Context context, GuokeContract.View view) {
+    @Inject
+    public GuokePresenter(GuokeContract.View view) {
         mView = view;
-        mContext = context;
     }
 
     @Override

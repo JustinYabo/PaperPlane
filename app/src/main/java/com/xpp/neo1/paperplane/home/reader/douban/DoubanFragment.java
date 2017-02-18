@@ -54,7 +54,7 @@ public class DoubanFragment extends Fragment implements DoubanContract.View{
     }
 
     @Override
-    public void setPresenter(DoubanContract.Presenter presenter) {
+    public void initViews() {
 
     }
 }

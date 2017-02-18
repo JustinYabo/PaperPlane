@@ -8,7 +8,7 @@ import com.xpp.neo1.paperplane.base.BaseView;
  */
 
 public interface DoubanContract {
-    interface View extends BaseView<Presenter> {
+    interface View extends BaseView {
         void showError();
 
         void showLoading();

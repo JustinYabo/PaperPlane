@@ -1,6 +1,6 @@
 package com.xpp.neo1.paperplane.home;
 
-import android.content.SharedPreferences;
+import android.app.Application;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -13,11 +13,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.xpp.neo1.paperplane.R;
+import com.xpp.neo1.paperplane.app.App;
+import com.xpp.neo1.paperplane.app.AppComponent;
 import com.xpp.neo1.paperplane.base.BaseActivity;
 import com.xpp.neo1.paperplane.home.sidebar.bookmarks.BookMarksFragment;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,6 +66,12 @@ public class MainActivity extends BaseActivity
         showMainFragment();
 
     }
+
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+        appComponent.inject(this);
+    }
+
 
     private void showMainFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
