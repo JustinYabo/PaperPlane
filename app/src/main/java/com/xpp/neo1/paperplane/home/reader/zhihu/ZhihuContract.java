@@ -1,8 +1,10 @@
 package com.xpp.neo1.paperplane.home.reader.zhihu;
 
-import com.xpp.neo1.paperplane.account.register.RegisterContract;
 import com.xpp.neo1.paperplane.base.BasePresenter;
 import com.xpp.neo1.paperplane.base.BaseView;
+import com.xpp.neo1.paperplane.bean.ZhihuNews;
+
+import java.util.List;
 
 /**
  * Created by neo1 on 2017/2/14.
@@ -16,7 +18,7 @@ public interface ZhihuContract {
 
         void hideLoading();
 
-        void showDatas();
+        void showDatas(List<ZhihuNews.StoriesBean> beanList);
 
         void showTimePickerDialog();
     }

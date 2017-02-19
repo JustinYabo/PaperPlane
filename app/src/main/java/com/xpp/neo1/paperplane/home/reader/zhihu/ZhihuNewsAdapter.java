@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -68,6 +67,13 @@ public class ZhihuNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return mBeanList.size() + 1;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (position == mBeanList.size())
+            return ZhihuNewsAdapter.TYPE_FOOTER;
+        return ZhihuNewsAdapter.TYPE_NORMAL;
+    }
+
     public interface OnItemClickListener {
         void OnItemClick(View view, int position);
     }
@@ -90,7 +96,6 @@ public class ZhihuNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 public void onClick(View view) {
                     if (listener != null)
                         listener.OnItemClick(itemView, getLayoutPosition());
-
                 }
             });
         }

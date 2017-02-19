@@ -40,7 +40,7 @@ public class NetWork {
         if (zhihuApi == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .client(okHttpClient)
-                    .baseUrl("http://gank.io/api/")
+                    .baseUrl("http://news-at.zhihu.com/api/4/news/")
                     .addConverterFactory(gsonConverterFactory)
                     .addCallAdapterFactory(rxJavaCallAdapterFactory)
                     .build();

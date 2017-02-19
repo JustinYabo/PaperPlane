@@ -1,6 +1,5 @@
 package com.xpp.neo1.paperplane.network.api;
 
-import com.xpp.neo1.paperplane.bean.ZhihuHistory;
 import com.xpp.neo1.paperplane.bean.ZhihuNews;
 
 import io.reactivex.Flowable;
@@ -13,11 +12,11 @@ import retrofit2.http.Path;
 
 public interface ZhihuApi {
     //获取最新的数据
-    @GET("/latest")
+    @GET("latest")
     Flowable<ZhihuNews> getLatest();
 
     //获取之前时间的新闻
-    @GET("/before/{date}")
-    Flowable<ZhihuHistory> getHistory(@Path("date") String date);
+    @GET("before/{date}")
+    Flowable<ZhihuNews> getHistory(@Path("date") String date);
 
 }
