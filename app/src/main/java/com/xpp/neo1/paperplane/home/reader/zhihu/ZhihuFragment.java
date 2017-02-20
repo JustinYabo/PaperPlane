@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ public class ZhihuFragment extends Fragment implements ZhihuContract.View {
     private ZhihuNewsAdapter mAdapter;
 
     private int mYear = Calendar.getInstance().get(Calendar.YEAR);
-    private int mMonth = Calendar.getInstance().get(Calendar.MONTH);
+    private int mMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
     private int mDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 
     public static ZhihuFragment newInstance() {
@@ -102,6 +103,7 @@ public class ZhihuFragment extends Fragment implements ZhihuContract.View {
                 mYear = year;
                 mMonth = monthOfYear;
                 mDay = dayOfMonth;
+                Log.d("dateset", "onDateSet: year:" + year + " month:" + monthOfYear + " days:" + dayOfMonth);
                 Calendar temp = Calendar.getInstance();
                 temp.clear();
                 temp.set(year, monthOfYear, dayOfMonth);

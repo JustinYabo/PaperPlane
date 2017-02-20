@@ -1,12 +1,13 @@
 package com.xpp.neo1.paperplane.home.reader.zhihu;
 
+import android.util.Log;
+
 import com.xpp.neo1.paperplane.bean.ZhihuNews;
 import com.xpp.neo1.paperplane.network.NetWork;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +33,7 @@ public class ZhihuPresenter implements ZhihuContract.Presenter {
     @Override
     public void loadPosts(long date, boolean clearing) {
         String time = dateToString(date);
+        Log.d("dateget", "loadPosts: " + time);
         if (clearing) mView.showLoading();
         NetWork.getZhihuApi()
                 .getHistory(time)
@@ -99,8 +101,6 @@ public class ZhihuPresenter implements ZhihuContract.Presenter {
      * @return
      */
     private String dateToString(long date) {
-        Date date1 = new Date(date);
-        DateFormat dateFormat = new SimpleDateFormat("yyyymmdd");
-        return dateFormat.format(date1);
+        return new SimpleDateFormat("yyyyMMdd").format(new Date(date));
     }
 }
