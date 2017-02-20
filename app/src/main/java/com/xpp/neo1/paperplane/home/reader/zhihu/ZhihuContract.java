@@ -18,7 +18,7 @@ public interface ZhihuContract {
 
         void hideLoading();
 
-        void showDatas(List<ZhihuNews.StoriesBean> beanList);
+        void showDatas(List<ZhihuNews.StoriesBean> beanList, boolean cleaning);
 
         void showTimePickerDialog();
     }
